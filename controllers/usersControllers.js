@@ -1,5 +1,6 @@
 const User = require('../models/userModels')
 const userUtils = require('../utils/userUtils')
+const Cart = require('../models/cartModel')
 
 const login = async (req,res)=>{
     try {
@@ -29,7 +30,7 @@ const register = async (req,res)=>{
     
         if(email && password && photo){
             const hashSalt = userUtils.createHashAndSalt(password)
-            await User.create({
+            const user = await User.create({
                 name: name,
                 email:email,
                 password: hashSalt.hash,
@@ -37,6 +38,11 @@ const register = async (req,res)=>{
                 photo: photo,
                 isAdmin: false
             })
+            await Cart.create({
+                userId:user._id,
+            })
+
+            res.status(201).end()
         }else{
             res.status(400).send('datos incompletos')
         }

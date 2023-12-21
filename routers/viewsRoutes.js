@@ -12,6 +12,8 @@ route.get('/',authMiddleware,viewsControllers.home)
 
 route.get("/dashboard",authMiddleware,isAdmin,viewsControllers.dashboard)
 
+route.get('/cart',authMiddleware,viewsControllers.cart)
+
 
 
 module.exports = route

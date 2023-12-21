@@ -4,7 +4,9 @@ const cors = require("cors")
 const mongoose = require('mongoose')
 const viewsRouter = require('./routers/viewsRoutes.js')
 const userRoutes = require('./routers/userRoutes.js')
+const productRoutes = require('./routers/productsRoute.js')
 const cookieParser = require('cookie-parser')
+const cartRoutes = require('./routers/cartRoutes.js')
 
 const app = express()
 
@@ -23,6 +25,8 @@ app.use('/',viewsRouter)
 
 //rutas de recursos
 app.use('/api/user/',userRoutes)
+app.use('/api/product/',productRoutes)
+app.use('/api/cart/',cartRoutes)
 
 
 const port = 3000
